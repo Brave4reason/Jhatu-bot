@@ -58,6 +58,8 @@ async def start_command(client: Client, message: Message):
         temp_msg = await message.reply("Please wait...")
         try:
             messages = await get_messages(client, ids)
+            await asyncio.sleep(10) 
+            await messages.delete() 
         except:
             await message.reply_text("Something went wrong..!")
             return
@@ -65,10 +67,11 @@ async def start_command(client: Client, message: Message):
 
         for msg in messages:
 
-            l = await if bool(CUSTOM_CAPTION) & bool(msg.document):
-                caption = await CUSTOM_CAPTION.format(previouscaption = "" if not msg.caption else msg.caption.html, filename = msg.document.file_name)
+            if bool(CUSTOM_CAPTION) & bool(msg.document):
+                caption = CUSTOM_CAPTION.format(previouscaption = "" if not msg.caption else msg.caption.html, filename = msg.document.file_name)
             else:
-                caption = await "" if not msg.caption else msg.caption.html           
+                caption = "" if not msg.caption else msg.caption.html
+
             if DISABLE_CHANNEL_BUTTON:
                 reply_markup = msg.reply_markup
             else:
@@ -79,13 +82,10 @@ async def start_command(client: Client, message: Message):
                 await asyncio.sleep(0.5)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
-                await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT)                
+                await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT)
             except:
                 pass
         return
-     Ch = await message.reply("Please wait...")
-     await asyncio.sleep(10) 
-     await Ch.delete() 
     else:
         reply_markup = InlineKeyboardMarkup(
             [
