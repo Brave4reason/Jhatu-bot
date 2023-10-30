@@ -69,7 +69,7 @@ async def start_command(client: Client, message: Message):
                 caption = CUSTOM_CAPTION.format(previouscaption = "" if not msg.caption else msg.caption.html, filename = msg.document.file_name)
             else:
                 caption = "" if not msg.caption else msg.caption.html
-
+            await asyncio.sleep(0.5)
             if DISABLE_CHANNEL_BUTTON:
                 reply_markup = msg.reply_markup
             else:
