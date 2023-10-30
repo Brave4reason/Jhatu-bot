@@ -68,9 +68,7 @@ async def start_command(client: Client, message: Message):
             if bool(CUSTOM_CAPTION) & bool(msg.document):
                 caption = CUSTOM_CAPTION.format(previouscaption = "" if not msg.caption else msg.caption.html, filename = msg.document.file_name)
             else:
-                caption = "" if not msg.caption else msg.caption.html
-            await asyncio.sleep(5) 
-            await caption.delete() 
+                caption = "" if not msg.caption else msg.caption.html           
             if DISABLE_CHANNEL_BUTTON:
                 reply_markup = msg.reply_markup
             else:
@@ -86,6 +84,8 @@ async def start_command(client: Client, message: Message):
             except:
                 pass
         return
+        await asyncio.sleep(10) 
+        await captain.delete() 
     else:
         reply_markup = InlineKeyboardMarkup(
             [
