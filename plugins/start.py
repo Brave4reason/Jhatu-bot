@@ -73,7 +73,7 @@ async def start_command(client: Client, message: Message):
             if DISABLE_CHANNEL_BUTTON:
                 reply_markup = msg.reply_markup
             else:
-                reply_markup = None
+               unknown = await reply_markup = None
 
             try:
                 await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT)
@@ -85,7 +85,7 @@ async def start_command(client: Client, message: Message):
                 pass
         return
         await asyncio.sleep(5) 
-        await messages.delete() 
+        await unknown.delete() 
     else:
         reply_markup = InlineKeyboardMarkup(
             [
