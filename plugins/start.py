@@ -65,7 +65,7 @@ async def start_command(client: Client, message: Message):
 
         for msg in messages:
 
-            if bool(CUSTOM_CAPTION) & bool(msg.document):
+        l = await if bool(CUSTOM_CAPTION) & bool(msg.document):
                 caption = await CUSTOM_CAPTION.format(previouscaption = "" if not msg.caption else msg.caption.html, filename = msg.document.file_name)
             else:
                 caption = await "" if not msg.caption else msg.caption.html           
@@ -83,8 +83,9 @@ async def start_command(client: Client, message: Message):
             except:
                 pass
         return
-        await asyncio.sleep(10) 
-        await caption.delete()
+     Ch = await message.reply("Please wait...")
+     await asyncio.sleep(10) 
+     await Ch.delete() 
     else:
         reply_markup = InlineKeyboardMarkup(
             [
