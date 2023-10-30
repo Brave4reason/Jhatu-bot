@@ -58,12 +58,10 @@ async def start_command(client: Client, message: Message):
         temp_msg = await message.reply("Please wait...")
         try:
             messages = await get_messages(client, ids)
-            await asyncio.sleep(10)
-            await messages.delete()
         except:
             await message.reply_text("Something went wrong..!")
             return
-        await temp_msg.delete()        
+        await temp_msg.delete()
 
         for msg in messages:
 
@@ -86,6 +84,8 @@ async def start_command(client: Client, message: Message):
             except:
                 pass
         return
+        await asyncio.sleep(5) 
+        await messages.delete() 
     else:
         reply_markup = InlineKeyboardMarkup(
             [
