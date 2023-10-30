@@ -67,7 +67,7 @@ async def start_command(client: Client, message: Message):
                 caption = CUSTOM_CAPTION.format(previouscaption = "" if not msg.caption else msg.caption.html, filename = msg.document.file_name)
             else:
                 caption = "" if not msg.caption else msg.caption.html
-
+            await asyncio.sleep(0.5)
             if DISABLE_CHANNEL_BUTTON:
                 reply_markup = msg.reply_markup
             else:
@@ -81,8 +81,7 @@ async def start_command(client: Client, message: Message):
                 await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT)                
             except:
                 pass
-        return
-        await asyncio.sleep(0.5)
+        return        
     else:
         reply_markup = InlineKeyboardMarkup(
             [
